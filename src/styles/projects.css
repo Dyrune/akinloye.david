@@ -1,0 +1,192 @@
+/* Updated project section styling */
+
+#projects {
+  background-color: #ffffff; /* White background */
+  padding: 40px 0;
+  text-align: center;
+}
+
+.featured {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  font-size: 2.5rem;
+  color: #333; /* Dark grey for title */
+  margin-bottom: 30px;
+}
+
+.project-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.project-slider {
+  max-width: 70%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.project-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  align-items: center;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid #ddd; /* Subtle border */
+  background-color: #f5f5f5; /* Light grey background for slide */
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Start below */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.project-slide.fade-in {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Move to original position */
+}
+
+.project-slide.fade-out {
+  opacity: 0; /* Hidden */
+  transform: translateY(20px); /* Move below */
+}
+
+.project-slide img {
+  width: 95%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.project-slide img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.project-info {
+  font-family: 'Helvetica Neue', sans-serif;
+  width: 95%;
+}
+
+.project-info h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #111; /* Darker text */
+}
+
+.project-info p {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.project-type {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 10px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.control-btn:hover i {
+  color: #000;
+}
+
+.pause-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  margin-top: 20px; /* Space above the button */
+  display: block; /* Center the button */
+  margin-left: auto; /* Centering */
+  margin-right: auto; /* Centering */
+}
+
+.dot-container {
+  margin-top: 30px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #111;
+}
+
+/* Button styles */
+.go-to-gallery-btn {
+  background-color: transparent; /* Match your theme */
+  border: 1px solid black; /* Or your desired border color */
+  color: black;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px; /* Adjust spacing */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.go-to-gallery-btn:hover {
+  background-color: black; /* Change on hover */
+  color: white; /* Change text color on hover */
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 768px) {
+  .project-display {
+    flex-direction: column; /* Stack elements vertically */
+    max-width: 90%; /* Use more width on smaller screens */
+  }
+
+  .project-slider {
+    max-width: 100%; /* Full width for slider */
+  }
+
+  .project-info h3 {
+    font-size: 1.5rem; /* Smaller title font */
+  }
+
+  .project-info p {
+    font-size: 0.9rem; /* Smaller description font */
+  }
+
+  .control-btn {
+    font-size: 1.5rem; /* Smaller control buttons */
+  }
+
+  .pause-btn {
+    font-size: 1.2rem; /* Smaller pause button */
+  }
+
+  .go-to-gallery-btn {
+    font-size: 0.9rem; /* Smaller button font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+
+  .dot {
+    width: 10px; /* Smaller dots */
+    height: 10px; /* Smaller dots */
+  }
+}

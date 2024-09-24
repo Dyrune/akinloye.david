@@ -1,0 +1,160 @@
+
+/* Background Image Transitions */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url('/public/images/pexels-sunny-1340583261-25435397.jpg') no-repeat center center/cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  z-index: -1; /* Behind the content */
+  transform: translateX(100%);
+}
+
+/* Change background image on state */
+.hero.background-change::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.brand-name {
+  position: absolute;
+  font-size: 35vw;
+  background: linear-gradient(to bottom, #faf6f6, #000000);
+  -webkit-background-clip: text;
+  color: transparent;
+  opacity: 0.6;
+  z-index: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+
+
+.sliding-text {
+  font-size: 2.7rem;
+  display: flex;
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeInOut 10s ease-in-out infinite; 
+  color: lightgrey;
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Animation for text fading in and out */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translateY(20px);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Styling */
+.view {
+  font-size: 1rem;
+  padding: 15px 30px;
+  z-index: 1000;
+  margin-top: 20px;
+  opacity: 1;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.hero button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+
+  .sliding-text {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    animation: fadeInOut 10s ease-in-out infinite; 
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    position: relative;
+    z-index: 1000;
+  }
+}
+
+/* Container for the Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 90vh; /* Full viewport height */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  animation: backgroundSlide 40s infinite; /* Slide and fade animation */
+}
+
+/* Animation for background sliding and fading */
+@keyframes backgroundSlide {
+  0% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-sunny-1340583261-25435397.jpg'); /* Change to your first image path */
+  }
+  15% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-rok-romih-1746122-3312671.jpg'); /* Maintain image visibility */
+  }
+  30% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-rok-romih-1746122-3312671.jpg'); /* Change to your second image path */
+  }
+  45% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-federico-orlandi-1423142-3260627.jpg'); /* Fade out second image */
+  }
+  60% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-rok-romih-1746122-3312671.jpg'); /* Change to your third image path */
+  }
+  75% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-tomfisk-3419308.jpg'); /* Fade in third image */
+  }
+  100% {
+    opacity: 1;
+    background-image: url('/public/images/pexels-sunny-1340583261-25435397.jpg'); /* Loop back to first image */
+  }
+}
+/* Animation for text fading in and out */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

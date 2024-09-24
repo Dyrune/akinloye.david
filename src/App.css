@@ -1,0 +1,192 @@
+/* General Body Styles */
+body {
+  scroll-behavior: smooth;
+}
+
+/* Styling for the header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.5s ease-in-out; /* Background color animation */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 11;
+}
+
+/* Main App container */
+.App {
+  padding-top: 40px; /* Offset for header height */
+  overflow: auto;
+  transition: overflow 0.3s ease;
+}
+
+.hide-scrollbar {
+  overflow: hidden; /* Hide scrollbar */
+}
+
+/* Projects section */
+.projects-section {
+  transition: opacity 0.5s ease, background-color 0.5s ease; /* Smooth opacity transition */
+  padding: 0px; /* Add some padding if needed */
+  margin-top: 0; /* Remove margin to connect with header */
+  color: white; /* Change text color to white */
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid black;
+  align-items: center;
+  background-color: black; /* Default background color when fully visible */
+}
+
+/* Button Styles */
+.scroll-button {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #555; /* Darker on hover */
+}
+
+/* Profile Icons */
+.profile-icons {
+  display: flex;
+  gap: 10px; /* Space between icons */
+}
+
+.profile-icons a {
+  padding: 10px 20px;
+  color: #333; /* Dark color for icons */
+  transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.profile-icons a:hover {
+  padding: 10px 20px;
+  color: lightgray; /* Dark color for icons */
+  transform: scale(1.2);
+}
+
+.projects-section .profile-icons a,
+.projects-section .menu-icon {
+  color: white !important; /* Change profile icons and menu icon color to white in Projects section */
+}
+
+/* Menu Icon */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align menu icon to the right */
+  cursor: pointer;
+  font-size: 2rem;
+  color: #333; /* Dark color for menu icon */
+  z-index: 1001; /* Ensure the icon stays on top */
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Add subtle scaling and color change */
+}
+
+.menu-icon:hover {
+  transform: scale(1.1); /* Slightly enlarge the menu icon on hover */
+}
+
+.projects-section .menu-icon {
+  color: white; /* Change the menu icon to white when in the Projects section */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+  transform: translateX(100%); /* Initially hidden to the right */
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Custom easing for a more natural effect */
+  background-color: rgba(240, 240, 240, 0.9); /* Semi-transparent background */
+  padding: 0 10px;
+  border-radius: 8px;
+  position: absolute;
+  top: 10px; /* Adjust top position based on menu icon size */
+  right: 60px; /* Align with right edge of the header */
+}
+
+.nav-links.show {
+  transform: translateX(0); /* Slide in from right */
+}
+
+.nav-links.hide {
+  transform: translateX(120%); /* Slide out to right */
+}
+
+.icon {
+  padding: 4px 15px;
+}
+
+.nav-links a {
+  margin: 0 10px;
+  color: #333;
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.nav-links a.active {
+  font-weight: bold;
+  color: black; /* Active color */
+}
+
+
+.nav-links a:hover {
+  color: #222;
+  text-decoration: none;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-icons a {
+    padding: 5px 10px;
+  }
+  
+  .nav-links a {
+    margin: 0 0px;
+    color: #333;
+    font-size: 0.8rem;
+    text-decoration: none;
+    padding: 8px;
+}.nav-links.hide {
+  transform: translateX(130%);
+}
+}
+/* Add to your Gallery.css */
+.back-button {
+  display: inline-block;
+  padding: 7px 14px;
+  margin-right: 25px;
+  color: black;
+  font-size: 14px;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.5s;
+}
+
+.back-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.back-link {
+  display: block; /* Make it block for better spacing */
+  margin-bottom: 10px; /* Space between back link and menu items */
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+}

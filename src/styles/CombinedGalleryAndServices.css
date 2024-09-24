@@ -1,0 +1,123 @@
+/* General page layout for gallery and services */
+.gallery-section, .services-section {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0; /* Space between sections */
+    position: relative;
+    padding: 40px 20px; /* Added padding for better separation */
+}
+
+
+/* Sidebar for both gallery and services */
+.sidebar {
+    width: 300px; /* Adjusted width to ensure enough space */
+    padding: 0 20px;
+    background-color: transparent;
+    position: fixed; /* Make the sidebar fixed */
+    top: 100px; /* Adjust the top position */
+    left: 20px; /* Adjust the left position */
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
+.sidebar h2 {
+    font-size: 2rem;
+    color: #333;
+    padding: 0;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+/* Grid layout for both gallery and services */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2-column grid */
+    gap: 20px;
+    padding: 10px 20px;
+    margin-left: 320px; /* Leave space for the fixed sidebar */
+}
+
+/* Services page grid */
+.services-page {
+    display: flex;
+}
+
+.services-grid {
+    gap: 20px;
+    padding: 10px 20px;
+    margin-left: 320px; /* Leave space for the fixed sidebar */
+}
+
+/* Separator between gallery and services */
+.section-separator {
+    height: 50px;
+    background-color: transparent;
+}
+
+/* Item styling for gallery and services */
+.gallery-item, .service-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover, .service-item:hover {
+    transform: scale(1.02);
+}
+
+.gallery-item img, .service-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.gallery-info, .service-info {
+    padding: 10px;
+}
+
+.gallery-info h3, .service-info h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.gallery-info p, .service-info p {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Sort dropdown styling */
+.sort-dropdown {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .gallery-section, .services-section {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .gallery-grid, .services-grid {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+        padding: 0;
+    }
+}
+
+@media (max-width: 1100px) {
+    .gallery-grid, .services-grid {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+        padding: 0;
+    }
+}
