@@ -3,6 +3,12 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Main App container */
+.App {
+  padding-top: 0px; /* Offset for header height */
+  overflow: auto;
+  transition: overflow 0.3s ease;
+}
 /* Styling for the header */
 .header {
   display: flex;
@@ -11,17 +17,12 @@ body {
   transition: background-color 0.5s ease-in-out; /* Background color animation */
   position: fixed;
   width: 100%;
+  background-color: transparent;
   top: 0;
   box-sizing: border-box;
-  z-index: 11;
+  z-index: 9999;
 }
 
-/* Main App container */
-.App {
-  padding-top: 40px; /* Offset for header height */
-  overflow: auto;
-  transition: overflow 0.3s ease;
-}
 
 .hide-scrollbar {
   overflow: hidden; /* Hide scrollbar */
@@ -73,7 +74,7 @@ body {
 
 .profile-icons a:hover {
   padding: 10px 20px;
-  color: lightgray; /* Dark color for icons */
+  color: rgb(0, 0, 0); /* Dark color for icons */
   transform: scale(1.2);
 }
 
@@ -162,13 +163,16 @@ body {
     font-size: 0.8rem;
     text-decoration: none;
     padding: 8px;
-}.nav-links.hide {
+}
+.nav-links.hide {
   transform: translateX(130%);
 }
 }
-/* Add to your Gallery.css */
+
 .back-button {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 7px 14px;
   margin-right: 25px;
   color: black;
@@ -176,17 +180,34 @@ body {
   border: 2px solid black;
   border-radius: 5px;
   text-decoration: none;
-  transition: background-color 0.5s;
+  transition: background-color 1s, color 0.5s, background-image 1.5s;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  background-image: none; /* No image by default */
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .back-button:hover {
-  background-color: black;
-  color: white;
+  background-color: black; /* Change background on hover */
+  background-image: url('/public/assets/back.png'); /* Show image on hover */
+  color: transparent; /* Hide text on hover */
+  cursor: pointer; /* Keep the cursor pointer */
 }
 
-.back-link {
-  display: block; /* Make it block for better spacing */
-  margin-bottom: 10px; /* Space between back link and menu items */
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Inherit color from parent */
+/* You can adjust this if you want an image when focused */
+.back-button:focus {
+  outline: none;
+}
+
+/* App.css or animations.css */
+.transition-container {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.projects-section {
+  transition: opacity 0.5s ease-in-out;
 }

@@ -1,106 +1,120 @@
 /* General Styles */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.services-container {
+  display: flex;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-sidebar {
+  flex-basis: 25%; /* Fixed width for the sidebar */
+  padding-right: 20px;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.sort-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  border-radius: 4px;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+.sort-dropdown:focus {
+  outline: none;
+  border-color: #333;
+}
+
+/* Grid Layout for Services */
+.services-grid {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  flex-grow: 1; /* Allow the grid to take remaining space */
+  margin-left: 20px;
+}
+
+.service-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Start position below */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+}
+
+.service-item.slide-in {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Move to original position */
+}
+
+.service-item:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-info {
+  padding-top: 10px;
+}
+
+.service-title {
+  font-size: 18px;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.service-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .services-container {
-    display: flex;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .services-sidebar {
-    flex-basis: 25%;
-    padding-right: 20px;
-  }
-  
-  .sidebar-title {
-    font-size: 24px;
-    color: #111;
-    margin-bottom: 20px;
-  }
-  
-  .sort-dropdown {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background: #f9f9f9;
-    font-size: 16px;
-    color: #333;
-    border-radius: 4px;
-    appearance: none;
-    transition: all 0.3s ease;
-  }
-  
-  .sort-dropdown:focus {
-    outline: none;
-    border-color: #333;
-  }
-  
-  /* Grid Layout for Services */
-  .services-grid {
-    display: grid;
-    gap: 20px;
-    flex-basis: 75%;
-    margin-left: 20px;
-  }
-  
-  .service-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .service-item:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .service-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .service-info {
-    padding-top: 10px;
-  }
-  
-  .service-title {
-    font-size: 18px;
-    color: #111;
-    margin-bottom: 8px;
-  }
-  
-  .service-description {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .services-container {
       flex-direction: column;
       padding: 20px;
-    }
-  
-    .services-sidebar {
+  }
+
+  .services-sidebar {
       margin-bottom: 20px;
-    }
-  
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
   }
-  
-  .service-video {
-    width: 100%; /* Adjust as needed */
-    height: auto;
-    object-fit: cover; /* Ensure video scales properly */
+
+  .services-grid {
+      grid-template-columns: 1fr; /* Single column layout */
   }
-  
+}
+
+.service-video {
+  width: 100%; /* Adjust as needed */
+  height: auto;
+  cursor: pointer;
+  object-fit: cover; /* Ensure video scales properly */
+}
+
+/* Animation Keyframes (if needed) */
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

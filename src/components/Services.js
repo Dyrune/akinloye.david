@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Services.css'; 
 
 const Services = () => {
   const [sortOption, setSortOption] = useState('Urban Design');
+  const [isAnimated, setIsAnimated] = useState(false);
+  
   const services = [
     { title: 'Masterplanning', type: 'Urban Design', description: 'Comprehensive urban planning...', video: '/animations/Architecture.mp4' },
     { title: 'Architecture', type: 'Building Design', description: 'Architectural design services...', video: '/animations/Building%20designs.mp4' }, 
@@ -16,6 +18,14 @@ const Services = () => {
   };
 
   const filteredServices = services.filter(service => service.type === sortOption);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAnimated(true); // Trigger animation after a brief delay
+    }, 100); // Adjust the delay as necessary
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="services-container">
@@ -32,14 +42,24 @@ const Services = () => {
 
       <div className="services-grid">
         {filteredServices.map((service, index) => (
-          <div className="service-item" key={index}>
+          <div
+            className={`service-item ${isAnimated ? 'slide-in' : ''}`} // Apply the slide-in class conditionally
+            key={index}
+            onMouseEnter={(e) => {
+              const video = e.currentTarget.querySelector('video');
+              video.play();
+            }}
+            onMouseLeave={(e) => {
+              const video = e.currentTarget.querySelector('video');
+              video.pause();
+            }}
+          >
             <video 
               src={service.video} 
               className="service-video"
-              autoPlay 
-              loop 
               muted 
-              style={{ display: 'block', width: '100%', height: 'auto' }} // Display like an image
+              loop 
+              style={{ display: 'block', width: '100%', height: 'auto' }}
             >
               Your browser does not support the video tag.
             </video>

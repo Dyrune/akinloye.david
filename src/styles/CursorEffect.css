@@ -1,0 +1,37 @@
+/* src/styles/CursorEffect.css */
+
+#cursor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensures it doesn't block clicks */
+  }
+  
+  #cursor-effect {
+    position: absolute;
+    width: 15px; /* Size of the effect */
+    height: 15px; /* Size of the effect */
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 50%; /* Make it circular */
+    box-shadow: 5px 5px 20px black; /* Box shadow */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease; /* Transition effects */
+  }
+  
+  .breathe {
+    animation: breathe 2s ease-in-out infinite; /* Slower breathing effect */
+  }
+  
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1); /* Original size */
+    }
+    50% {
+      transform: scale(1.2); /* Zoom in for breathing effect */
+    }
+  }
+  
