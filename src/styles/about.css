@@ -170,7 +170,7 @@ h2 {
   border: none;
   transition: all 1s ease;
   position: relative;
-  right: 0; /* Ensure it's at the right side of the page */
+  right: 5px; /* Ensure it's at the right side of the page */
   transform: scale(1); /* Initial scale */
 }
 
@@ -190,6 +190,7 @@ h2 {
   background-color: #333; /* Darker background for active button */
   color: white;
   font-weight: bold;
+  right: 11px;
   transform: scale(1.1); /* Slightly enlarge the active button */
 }
 

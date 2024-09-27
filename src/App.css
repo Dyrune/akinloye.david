@@ -1,5 +1,6 @@
 /* General Body Styles */
 body {
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 
