@@ -1,16 +1,45 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/about.css';
 
 const About = () => {
   const titleRef = useRef(null);
   const textRef = useRef(null);
   const experienceRef = useRef(null);
-  const educationRef = useRef(null); // Added this for the Education section
+  const educationRef = useRef(null);
   const experienceItemsRef = useRef([]);
+  
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sections = [
+    {
+      title: "About Me",
+      content: "Hi, I’m Akinloye T. David, an architect with a passion for crafting spaces that blend creativity, functionality, and sustainability. Originally from Lagos, Nigeria, I’ve always been fascinated by how architecture shapes the way we live, interact, and experience the world."
+    },
+    {
+      title: "Experience",
+      content: (
+        <ul>
+          <li><strong>Residential Design</strong>: Creating personalized homes.</li>
+          <li><strong>Commercial Architecture</strong>: Crafting efficient business spaces.</li>
+          <li><strong>Sustainable Architecture</strong>: Designing eco-friendly buildings.</li>
+          <li><strong>Urban Planning</strong>: Developing strategic solutions for urban environments.</li>
+        </ul>
+      ),
+    },
+    {
+      title: "Education",
+      content: (
+        <ul>
+          <li><strong>Federal univerity of technology</strong>: Bachelor of Architecture (B.Arch) - Graduated in 2020. Developed a strong foundation in design principles and technical skills essential for a successful career in architecture.</li>
+          <li><strong>ABC Institute of Technology</strong>: Master of Architecture (M.Arch) - Graduated in 2013. Focused on sustainable design and urban planning, engaging in projects that addressed real-world challenges.</li>
+          <li><strong>DEF Community College</strong>: Associate Degree in Architectural Technology - Graduated in 2008. Gained essential skills in architectural design and computer-aided design (CAD).</li>
+        </ul>
+      )
+    }
+  ];
 
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.2, // Trigger when 10% of the element is visible
+      threshold: 0.2,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -18,7 +47,7 @@ const About = () => {
         if (entry.isIntersecting) {
           entry.target.classList.add('fade-in');
         } else {
-          entry.target.classList.remove('fade-in'); // Remove class when leaving the section
+          entry.target.classList.remove('fade-in');
         }
       });
     }, observerOptions);
@@ -30,13 +59,6 @@ const About = () => {
       }
     });
 
-    // Observe each experience item
-    experienceItemsRef.current.forEach(item => {
-      if (item) {
-        observer.observe(item);
-      }
-    });
-
     return () => {
       // Clean up the observer
       [titleRef, textRef, experienceRef, educationRef].forEach(ref => {
@@ -44,15 +66,12 @@ const About = () => {
           observer.unobserve(ref.current);
         }
       });
-
-      // Unobserve each experience item
-      experienceItemsRef.current.forEach(item => {
-        if (item) {
-          observer.unobserve(item);
-        }
-      });
     };
   }, []);
+
+  const handleNavigation = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
     <section className="about-section">
@@ -64,6 +83,7 @@ const About = () => {
             className="architect-image"
           />
           <div className="social-icons">
+            <div className='ggre'>
             <a href="https://www.facebook.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
               <i className="fab fa-facebook-f"></i>
             </a>
@@ -75,28 +95,29 @@ const About = () => {
             </a>
             <a href="https://www.instagram.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
               <i className="fab fa-instagram"></i>
-            </a>
-          </div>
+            </a></div> <div className='jor'>
+            <a>0tnda@gmail.com</a>
+            <a>+234 902 123 4567</a>
+          </div></div>
         </div>
 
         <div className="text-section">
-          <h2 ref={titleRef} className="fade-item">About Me</h2>
-          <p ref={textRef} className="fade-item">
-            Hi, I’m [Architect’s Name], an architect with a passion for crafting spaces that blend creativity, functionality, and sustainability. Originally from [Location], I’ve always been fascinated by how architecture shapes the way we live, interact, and experience the world.
-          </p>
+          <h2 ref={titleRef} className="fade-item">{sections[activeIndex].title}</h2>
+          <div ref={textRef} className="fade-item content-box">
+            {sections[activeIndex].content}
+          </div>
 
-          <h3 ref={experienceRef} className="fade-item">Experience</h3>
-          <ul>
-            <li ref={el => experienceItemsRef.current[0] = el} className="fade-item"><strong>Residential Design</strong>: Creating personalized homes.</li>
-            <li ref={el => experienceItemsRef.current[1] = el} className="fade-item"><strong>Commercial Architecture</strong>: Crafting efficient business spaces.</li>
-            <li ref={el => experienceItemsRef.current[2] = el} className="fade-item"><strong>Sustainable Architecture</strong>: Designing eco-friendly buildings.</li>
-            <li ref={el => experienceItemsRef.current[3] = el} className="fade-item"><strong>Urban Planning</strong>: Developing strategic solutions for urban environments.</li>
-          </ul>
-
-          <h3>Education</h3> {/* Education header */}
-          <p ref={educationRef} className="fade-item">
-            I hold a Bachelor's Degree in Architecture from XYZ University, where I developed my technical skills and gained a strong foundation in design principles.
-          </p>
+          <div className="navigation">
+            {sections.map((section, index) => (
+              <button
+                key={index}
+                className={`nav-button ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => handleNavigation(index)}
+              >
+                {index + 1}. {section.title}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
