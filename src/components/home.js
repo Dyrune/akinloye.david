@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/home.css';
 
 const BackgroundSlider = () => {
-  // Sample project data
   const projects = [
     {
       title: "MaskOff",
@@ -41,7 +40,6 @@ const BackgroundSlider = () => {
     },
   ];
 
-  // Technology icons mapping
   const technologyIcons = {
     Nodejs: "/assets/icons8-autocad-48.png",
     React: "/assets/icons8-autocad-48.png",
@@ -50,34 +48,75 @@ const BackgroundSlider = () => {
   };
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [fade, setFade] = useState("fade-in");
-  const [progress, setProgress] = useState(0);
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const slideDuration = 7000; // 7 seconds per slide
 
   const nextSlide = () => {
-    setFade("fade-out"); // Start fade-out
-    setTimeout(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % projects.length); // Go to next slide
-      setTimeout(() => setFade("fade-in"), 300); // Delay fade-in for smoother crossfade
-      setProgress(0); // Reset progress
-    }, 1200); // Match this with the CSS transition duration
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % projects.length);
   };
 
-  // Auto-slide effect every 3 seconds
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      nextSlide(); // Move to the next slide
-    }, 7000); // Change every 3 seconds
+      nextSlide();
 
-    return () => clearInterval(slideInterval); // Clean up the interval on component unmount
+      // Reverse progress circle after countdown ends (0s)
+      if (progressCircle.current) {
+        // Reverse progress to full (reset) with smooth transition
+        progressCircle.current.querySelector('circle').style.transition = 'stroke-dashoffset 0.5s ease-out';
+        progressCircle.current.querySelector('circle').style.strokeDashoffset = '125.6'; // Full circle (reversed)
+      }
+
+      // Reset timer content
+      if (progressContent.current) {
+        progressContent.current.textContent = '7s'; // Reset to 7 seconds
+      }
+    }, slideDuration);
+
+    let start;
+    const updateProgress = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / slideDuration, 1); // Cap at 1 (100%)
+
+      if (progressCircle.current) {
+        const dashoffset = 125.6 * (1 - progress); // Progress forward
+        progressCircle.current.querySelector('circle').style.strokeDashoffset = dashoffset;
+        progressCircle.current.querySelector('circle').style.transition = 'stroke-dashoffset 0.1s linear'; // Smooth progress
+      }
+
+      if (progressContent.current) {
+        progressContent.current.textContent = `${Math.ceil((slideDuration - elapsed) / 1000)}s`;
+      }
+
+      // Detect when countdown hits 0, and start reversing the circle smoothly
+      if (progress === 1) {
+        // Add a delay of 0.3s for the reverse animation to be noticeable
+        setTimeout(() => {
+          if (progressCircle.current) {
+            progressCircle.current.querySelector('circle').style.transition = 'stroke-dashoffset 0.5s ease-out';
+            progressCircle.current.querySelector('circle').style.strokeDashoffset = '125.6'; // Full reset
+          }
+        }, 300);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(updateProgress); // Continue progress update
+      } else {
+        start = null; // Reset start for the next slide
+      }
+    };
+
+    const animationFrame = requestAnimationFrame(updateProgress);
+
+    return () => {
+      clearInterval(slideInterval);
+      cancelAnimationFrame(animationFrame);
+    };
   }, [currentSlide]);
 
   const handleThumbnailClick = (index) => {
-    setFade("fade-out"); // Start fade-out
-    setTimeout(() => {
-      setCurrentSlide(index);
-      setTimeout(() => setFade("fade-in"), 300); // Delay fade-in for smoother crossfade
-      setProgress(0); // Reset progress
-    }, 1000); // Match this with the CSS transition duration
+    setCurrentSlide(index);
   };
 
   return (
@@ -91,32 +130,43 @@ const BackgroundSlider = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className={`content ${fade}`}>
-          <h2 className={`slide-title ${fade}`}>{projects[currentSlide].title}</h2>
+        <div className="content fade-in">
+          <h2 className="slide-title">{projects[currentSlide].title}</h2>
           <p>{projects[currentSlide].description}</p>
 
-          {/* Display the technology icons */}
-          <div className={`technologies ${fade}`}>
+          <div className="technologies">
             {projects[currentSlide].technologies.map((tech, index) => (
               <span key={index} className="tech-badge">
                 <img
-                  src={technologyIcons[tech]} // Use the icon corresponding to the technology
+                  src={technologyIcons[tech]}
                   alt={tech}
-                  style={{ width: "30px", height: "30px", marginRight: "5px" }} // Adjust size as needed
+                  style={{ width: "30px", height: "30px", marginRight: "5px" }}
                 />
               </span>
             ))}
           </div>
 
-          {/* Link to project */}
           <a href={projects[currentSlide].link} className="project-link">
             View Project
           </a>
         </div>
 
-        {/* Progress Bar */}
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${progress}%` }} />
+        {/* Progress Circle */}
+        <div className="autoplay-progress">
+          <svg viewBox="0 0 48 48" ref={progressCircle}>
+            <circle
+              cx="24"
+              cy="24"
+              r="20"
+              strokeDasharray="125.6" // 2 * Math.PI * 20
+              strokeDashoffset="125.6" // Start with full circle
+              stroke="#fff" // Change progress bar color to white
+              strokeWidth="4"
+              fill="none"
+              style={{ transition: 'stroke-dashoffset 0.1s linear' }} // Smooth progress
+            ></circle>
+          </svg>
+          <span ref={progressContent}>7s</span>
         </div>
       </div>
 
@@ -141,7 +191,6 @@ const BackgroundSlider = () => {
                 overflow: "hidden",
                 borderRadius: "5px",
                 cursor: "pointer",
-                transition: 'transform 0.5s ease', // Smooth transition for thumbnails
               }}
               onClick={() => handleThumbnailClick(index)}
             >

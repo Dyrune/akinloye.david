@@ -1,74 +1,83 @@
-
-
-.about-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/public/images/video.mp4') no-repeat center center/cover; /* Fallback image */
-  z-index: 1;
-  opacity: 0.7;
-}
 .about-section {
-  position: relative;
-  height: 100vh;
-  padding: 50px;
-  background-color: #f5f5f5; /* Subtle light gray background */
-  text-align: center;
+  margin: 20px;
+}
+
+.container {
+  padding: 5% 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-section {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  width: 50%;
   align-items: center;
-  overflow: hidden;
 }
 
-.services-button:hover {
-  background-color: black;
-  color: white;
+.text-section {
+  width: 50%;
 }
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.fade-item {
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease-in-out; /* Smooth transition */
+}
+
+.fade-item.fade-in {
+  opacity: 1; /* Show when in view */
+}
+
+.architect-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.1; /* Control the transparency of the video */
+  height: auto;
+  max-width: 300px;
+  border-radius: 8px;
 }
 
-.about-content {
-  position: relative;
-  z-index: 2;
-  background-color: transparent; /* Transparent white background for content */
-  padding: 40px;
-  border-radius: 10px;
-  max-width: 800px;
-  text-align: center;
+.social-icons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.about-section h2 {
-  font-size: 2rem;
-  color: #333; /* Dark gray for heading */
-  margin-bottom: 20px;
+.social-icon {
+  margin-right: 10px;
+  color: #333;
+  font-size: 1.5em;
 }
 
-.about-section p {
-  font-size: 1.25rem;
-  color: #666; /* Medium gray for text */
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.services-button {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 2px solid black;
-  background-color: transparent;
-  color: black;
-  text-decoration: none;
-  border-radius: 5px;
+.text-section h2, .text-section h3 {
   margin-top: 20px;
-  transition: all 0.3s ease;
+}
+
+.text-section p {
+  width: 50%;
+  margin: 10px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section {
+    margin-bottom: 20px;
+  }
+}
+
+
+.fade-item {
+  opacity: 0; /* Start fully transparent */
+  transform: translateX(30px); /* Start 20px from the right */
+  transition: opacity 1s ease, transform 1s ease; /* Transition for fade and slide */
+}
+
+.fade-in {
+  opacity: 1; /* Fully opaque */
+  transform: translateX(0); /* Move to original position */
 }
