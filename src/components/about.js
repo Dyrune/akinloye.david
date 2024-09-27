@@ -4,10 +4,8 @@ import '../styles/about.css';
 const About = () => {
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const experienceRef = useRef(null);
-  const educationRef = useRef(null);
-  const experienceItemsRef = useRef([]);
-  
+  const imageRef = useRef(null); // Reference for image section
+  const socialIconsRef = useRef(null); // Reference for social icons
   const [activeIndex, setActiveIndex] = useState(0);
   const sections = [
     {
@@ -29,9 +27,9 @@ const About = () => {
       title: "Education",
       content: (
         <ul>
-          <li><strong>Federal univerity of technology</strong>: Bachelor of Architecture (B.Arch) - Graduated in 2020. Developed a strong foundation in design principles and technical skills essential for a successful career in architecture.</li>
-          <li><strong>ABC Institute of Technology</strong>: Master of Architecture (M.Arch) - Graduated in 2013. Focused on sustainable design and urban planning, engaging in projects that addressed real-world challenges.</li>
-          <li><strong>DEF Community College</strong>: Associate Degree in Architectural Technology - Graduated in 2008. Gained essential skills in architectural design and computer-aided design (CAD).</li>
+          <li><strong>Federal University of Technology</strong>: Bachelor of Architecture (B.Arch) - Graduated in 2020.</li>
+          <li><strong>ABC Institute of Technology</strong>: Master of Architecture (M.Arch) - Graduated in 2013.</li>
+          <li><strong>DEF Community College</strong>: Associate Degree in Architectural Technology - Graduated in 2008.</li>
         </ul>
       )
     }
@@ -52,8 +50,8 @@ const About = () => {
       });
     }, observerOptions);
 
-    // Observe each section
-    [titleRef, textRef, experienceRef, educationRef].forEach(ref => {
+    // Observe the title, text sections, image, and social icons
+    [titleRef, textRef, imageRef, socialIconsRef].forEach(ref => {
       if (ref.current) {
         observer.observe(ref.current);
       }
@@ -61,7 +59,7 @@ const About = () => {
 
     return () => {
       // Clean up the observer
-      [titleRef, textRef, experienceRef, educationRef].forEach(ref => {
+      [titleRef, textRef, imageRef, socialIconsRef].forEach(ref => {
         if (ref.current) {
           observer.unobserve(ref.current);
         }
@@ -76,29 +74,32 @@ const About = () => {
   return (
     <section className="about-section">
       <div className="container">
-        <div className="image-section">
+        <div className="image-section" ref={imageRef}> {/* Reference for image section */}
           <img
             src="/images/IMG_0300 (1).JPG" // Ensure this path is correct
             alt="Architect Portrait"
-            className="architect-image"
+            className="architect-image" // No fade-in class here
           />
-          <div className="social-icons">
+          <div className="social-icons" ref={socialIconsRef}> {/* Reference for social icons */}
             <div className='ggre'>
-            <a href="https://www.facebook.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://www.instagram.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
-              <i className="fab fa-instagram"></i>
-            </a></div> <div className='jor'>
-            <a>0tnda@gmail.com</a>
-            <a>+234 902 123 4567</a>
-          </div></div>
+              <a href="https://www.facebook.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://www.instagram.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <i className="fab fa-instagram"></i>
+              </a>
+            </div>
+            <div className='jor'>
+              <a>0tnda@gmail.com</a>
+              <a>+234 902 123 4567</a>
+            </div>
+          </div>
         </div>
 
         <div className="text-section">

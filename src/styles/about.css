@@ -15,20 +15,21 @@ h2 {
     font-family: 'PT Sans', sans-serif;
 }
 
-
-
 .about-section {
   display: flex;
   flex-direction: column;
   padding: 20px;
   max-width: 1200px;
   margin: auto;
+  overflow: visible; /* Ensure overflow is visible */
 }
 
 .jor {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center; /* Center align text */
+  margin-top: 10px; /* Add space above contact info */
 }
 
 .jor a {
@@ -45,10 +46,18 @@ h2 {
 }
 
 .image-section {
-  flex: 1 1;
-  width: 50%;
-  max-width: 300px;
+  flex: 1 1 300px; /* Allow it to grow and shrink with a minimum width */
+  max-width: 50%; /* Limit the max width */
   padding: 50px;
+  margin-bottom: 20px; /* Space below */
+}
+
+.text-section {
+  flex: 2 1 500px; /* Allow it to grow and shrink */
+  min-width: 0; /* Prevent content overflow */
+  position: relative;
+  padding: 50px; /* Adjust padding */
+  width: 450px;
 }
 
 .architect-image {
@@ -74,12 +83,13 @@ h2 {
   animation: image-float 4s ease-in-out infinite; /* Floating animation */
 }
 
-
 .social-icons {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Spacing between icons */
-  position: relative; /* Enable floating effect */
+  margin-top: 5px; /* Space above */
+  opacity: 1; /* Ensure visibility */
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .social-icon {
@@ -103,16 +113,31 @@ h2 {
   animation: float 3s ease-in-out infinite; /* Floating effect */
 }
 
-
-
 .fade-item {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transform: translateX(-40px); /* Start 40px to the left */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Adjust duration */
 }
 
 .fade-in {
   opacity: 1;
+  transform: translateX(0); /* Move to original position */
 }
+
+
+.image-section,
+.social-icons {
+  opacity: 0;
+  transform: translateX(-40px); /* Start 40px to the left */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Smooth transition, duration increased */
+}
+
+.image-section.fade-in,
+.social-icons.fade-in {
+  opacity: 1;
+  transform: translateX(0); /* Move to original position */
+}
+
 
 .content-box {
   margin-bottom: 20px; /* Adding margin between sections */
@@ -149,7 +174,6 @@ h2 {
   transform: scale(1); /* Initial scale */
 }
 
-
 .nav-button:hover {
   transform: scale(1.05); /* Slightly expand on hover */
   background-color: rgba(0, 0, 0, 0.1);
@@ -171,16 +195,17 @@ h2 {
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
+    flex-direction: column; /* Stack vertically on smaller screens */
   }
 
   .image-section {
     margin-right: 0;
     margin-bottom: 20px;
+    width: 100%; /* Ensure it takes full width on smaller screens */
   }
 
   .text-section {
-    padding-right: 0; /* Remove padding on smaller screens */
+    width: 100%; /* Ensure it takes full width */
   }
 
   .navigation {
