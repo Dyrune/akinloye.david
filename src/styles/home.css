@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 80vh;
+  height: 90vh;
 }
 
 .slider {
@@ -30,6 +30,11 @@
   text-shadow: 2px 2px 4px rgb(109, 109, 109);
   padding: 10px 20px; /* Padding for better text visibility */
   transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+}
+.highlighted {
+  border: 2px solid yellow; /* Example highlight effect */
+  transform: scale(1.05); /* Slightly increase size */
+  transition: transform 0.3s ease, border 0.3s ease;
 }
 
 .content p {
@@ -98,6 +103,7 @@
 .project-link:hover::before {
   height: 100%; /* Expands the background to fill the button */
   color: white; /* Changes the text color */
+  cursor: pointer;
 }
 
 .project-link:hover {

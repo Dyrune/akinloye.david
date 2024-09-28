@@ -5,7 +5,6 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Hero from './components/home';
 import About from './components/about'; // Import the About component
-import Projects from './components/projects';
 import ContactForm from './components/ContactForm';
 import Footer from './components/footer';
 import MenuIcon from './components/MenuIcon';
@@ -32,7 +31,6 @@ const App = () => {
               <>
                 <section id="hero"><Hero /></section>
                 <section id="about"><About /></section> {/* Use About here */}
-                <section id="projects" className="projects-section"><Projects /></section>
                 <section id="contact"><ContactForm /></section>
               </>
             } />

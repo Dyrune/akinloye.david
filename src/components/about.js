@@ -73,6 +73,7 @@ const About = () => {
 
   return (
     <section className="about-section">
+      <h1>About Me</h1>
       <div className="container">
         <div className="image-section" ref={imageRef}> {/* Reference for image section */}
           <img
@@ -80,6 +81,13 @@ const About = () => {
             alt="Architect Portrait"
             className="architect-image" // No fade-in class here
           />
+        </div>
+
+        <div className="text-section">
+          <h2 ref={titleRef} className="fade-item">{sections[activeIndex].title}</h2>
+          <div ref={textRef} className="fade-item content-box">
+            {sections[activeIndex].content}
+          </div>
           <div className="social-icons" ref={socialIconsRef}> {/* Reference for social icons */}
             <div className='ggre'>
               <a href="https://www.facebook.com/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon">
@@ -99,13 +107,6 @@ const About = () => {
               <a>0tnda@gmail.com</a>
               <a>+234 902 123 4567</a>
             </div>
-          </div>
-        </div>
-
-        <div className="text-section">
-          <h2 ref={titleRef} className="fade-item">{sections[activeIndex].title}</h2>
-          <div ref={textRef} className="fade-item content-box">
-            {sections[activeIndex].content}
           </div>
 
           <div className="navigation">

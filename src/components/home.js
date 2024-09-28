@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importing useNavigate for navigation
 import '../styles/home.css';
 
 const BackgroundSlider = () => {
@@ -52,6 +53,8 @@ const BackgroundSlider = () => {
   const progressContent = useRef(null);
   const slideDuration = 7000; // 7 seconds per slide
 
+  const navigate = useNavigate(); // Hook for navigation
+
   const nextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % projects.length);
   };
@@ -62,7 +65,6 @@ const BackgroundSlider = () => {
 
       // Reverse progress circle after countdown ends (0s)
       if (progressCircle.current) {
-        // Reverse progress to full (reset) with smooth transition
         progressCircle.current.querySelector('circle').style.transition = 'stroke-dashoffset 0.5s ease-out';
         progressCircle.current.querySelector('circle').style.strokeDashoffset = '125.6'; // Full circle (reversed)
       }
@@ -89,7 +91,6 @@ const BackgroundSlider = () => {
         progressContent.current.textContent = `${Math.ceil((slideDuration - elapsed) / 1000)}s`;
       }
 
-      // Detect when countdown hits 0, and start reversing the circle smoothly
       if (progress === 1) {
         // Add a delay of 0.3s for the reverse animation to be noticeable
         setTimeout(() => {
@@ -146,7 +147,7 @@ const BackgroundSlider = () => {
             ))}
           </div>
 
-          <a href={projects[currentSlide].link} className="project-link">
+          <a onClick={() => navigate("/gallery")} className="project-link">
             View Project
           </a>
         </div>

@@ -22,9 +22,7 @@ body {
   top: 0;
   box-sizing: border-box;
   z-index: 9999;
-}
-
-
+} 
 .hide-scrollbar {
   overflow: hidden; /* Hide scrollbar */
 }
